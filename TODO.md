@@ -21,7 +21,7 @@ Todo list for FFastCut
     - [x] File format enforcement
     - [ ] File Exceptions
 - [x] Add Save To File Button
-  - [ ] Implementation
+  - [x] Implementation
 - [ ] Add Exit Button
   - [ ] Implementation
 - [ ] Add Options Button

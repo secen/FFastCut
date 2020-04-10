@@ -42,5 +42,10 @@ namespace FFmpeg_Wrapper_WPF.NET
         {
             commandArgs = "-y -i " + source + " -ss " + start + " -to " + end + " -async 1 " + newName;
         }
+
+        internal string ToCSVLine()
+        {
+            return String.Format("{0};{1};{2};{3}",newName,start,end,source).Replace("\"",String.Empty);
+        }
     }
 }

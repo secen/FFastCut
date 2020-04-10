@@ -171,7 +171,23 @@ namespace FFmpeg_Wrapper_WPF.NET
         private void saveFileButtonClick(object sender, RoutedEventArgs e)
         {
             //save as file
-            throw new NotImplementedException();
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.Filter = "Text Files|*.txt;*.csv";
+            if(dlg.ShowDialog() == true)
+            {
+                string textToWrite = queueToText();
+                File.WriteAllText(dlg.FileName, textToWrite);
+            }
+        }
+
+        private string queueToText()
+        {
+            string result = "";
+            foreach(ffmpegEntry entry in Entries)
+            {
+                result += entry.ToCSVLine() +"\n";
+            }
+            return result;
         }
     }
 }

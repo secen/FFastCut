@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FFmpeg_Wrapper_WPF.NET"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="FFastCut" Height="450" Width="800">
     <Grid>
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
