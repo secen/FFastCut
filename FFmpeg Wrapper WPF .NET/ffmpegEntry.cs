@@ -6,14 +6,24 @@ using System.Threading.Tasks;
 
 namespace FFmpeg_Wrapper_WPF.NET
 {
-    class ffmpegEntry
+    public class ffmpegEntry
     {
         public String newName { get; set; }
         public String start { get; set; }
         public String end { get; set; }
         public String source { get; set; }
         public String commandArgs { get; set; }
-        String fullCommand { get; set; }
+        public ffmpegEntry(String name,String st,String en, String src)
+        {
+            newName = name;
+            newName = "\"" + newName + "\"";
+            start = st;
+            end = en;
+            source = src;
+            source = "\"" + source + "\"";
+            initCommandArgs();
+        }
+        public ffmpegEntry() { }
         public void loadFromCSVLine(String line)
         {
             String[] args = line.Split(';');
@@ -25,8 +35,12 @@ namespace FFmpeg_Wrapper_WPF.NET
             end = args[2];
             source = args[3];
             source = "\"" + source + "\"";
+            initCommandArgs();
+        }
+
+        internal void initCommandArgs()
+        {
             commandArgs = "-y -i " + source + " -ss " + start + " -to " + end + " -async 1 " + newName;
-            fullCommand = "ffmpeg.exe " + commandArgs;
         }
     }
 }

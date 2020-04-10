@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace FFmpeg_Wrapper_WPF.NET
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<ffmpegEntry> Entries;
-        String debugOutput="";
+        public ObservableCollection<ffmpegEntry> Entries;
+        readonly String debugOutput="";
         public MainWindow()
         {
             InitializeComponent();
-            Entries = new List<ffmpegEntry>();
+            Entries = new ObservableCollection<ffmpegEntry>();
+            queueDataGrid.ItemsSource = Entries;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -74,6 +77,17 @@ namespace FFmpeg_Wrapper_WPF.NET
                 debugConsole.Text = debugOutput;
                 process.WaitForExit();*/
             }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Entries.Clear();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ffmpegEntry selection = (ffmpegEntry)queueDataGrid.SelectedItem;
+            Entries.Remove(selection);
         }
     }
 }

@@ -1,13 +1,14 @@
 Todo list for FFastCut
 ====
 - [x] Add Task Button
-  - [ ] Implement The Panel
+  - [x] Implement The Panel
     - [x] Layout
-    - [ ] Implementation
+    - [x] Implementation
 - [x] Add Remove Task Button
-  - [ ] Implementation
+  - [x] Implementation
+  - [ ] Error Handling
 - [x] Add Clear Queue Button 
-  - [ ] Implementation
+  - [x] Implementation
 - [ ] Capture ffmpeg output asynchronously to the Debug Window
 - [ ] Clear the Queue after the ffmpeg process is done
    - [ ] Do so after all processes are done

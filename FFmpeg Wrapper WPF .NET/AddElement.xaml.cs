@@ -19,6 +19,7 @@ namespace FFmpeg_Wrapper_WPF.NET
     /// </summary>
     public partial class AddElement : Window
     {
+
         public AddElement()
         {
             InitializeComponent();
@@ -39,5 +40,11 @@ namespace FFmpeg_Wrapper_WPF.NET
             }
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var parent = ((MainWindow)Application.Current.MainWindow);
+            ffmpegEntry entry = new ffmpegEntry(nameTextBox.Text,startTextBox.Text,endTextBox.Text,sourceTextBox.Text);
+            parent.Entries.Add(entry);
+        }
     }
 }

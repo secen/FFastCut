@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,0,0" VerticalAlignment="Stretch" Width="Auto">
                 <TextBlock TextWrapping="Wrap" Text="Queue" Margin="0,0,0,2"/>
-                <DataGrid x:Name="queueDataGrid" MinHeight ="200" Height="Auto"/>
+                <DataGrid x:Name="queueDataGrid" MinHeight ="200" Height="Auto" HeadersVisibility="Column"/>
             </StackPanel>
             <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Height="Auto" Margin="10,0,0,0" VerticalAlignment="Stretch" Width="Auto">
                 <TextBlock TextWrapping="Wrap" Text="Debug Output" Margin="0,0,0,2"/>
@@ -28,13 +28,13 @@
             <StackPanel Margin="0,0,0,2">
                 <TextBlock TextWrapping="Wrap" Text="Entry"/>
                 <Button Content="Add" HorizontalContentAlignment="Left" Click="Button_Click"/>
-                <Button Content="Remove" HorizontalContentAlignment="Left"/>
+                <Button Content="Remove" HorizontalContentAlignment="Left" Click="Button_Click_4"/>
             </StackPanel>
             <StackPanel Margin="0,0,0,2">
                 <TextBlock TextWrapping="Wrap" Text="Queue"/>
                 <Button Content="Save To File" HorizontalContentAlignment="Left"/>
                 <Button Content="Load From File" HorizontalContentAlignment="Left" Click="Button_Click_1"/>
-                <Button Content="Clear" HorizontalContentAlignment="Left"/>
+                <Button Content="Clear" HorizontalContentAlignment="Left" Click="Button_Click_3"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Text="Processing"/>
