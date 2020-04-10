@@ -6,7 +6,7 @@ Todo list for FFastCut
     - [x] Implementation
 - [x] Add Remove Task Button
   - [x] Implementation
-  - [ ] Error Handling
+  - [x] Error Handling
 - [x] Add Clear Queue Button 
   - [x] Implementation
 - [ ] Capture ffmpeg output asynchronously to the Debug Window
@@ -18,7 +18,7 @@ Todo list for FFastCut
   - [ ] Implementation
     - [x] File Loading and Parsing
     - [ ] Parse Format Requirements
-    - [ ] File format enforcement
+    - [x] File format enforcement
     - [ ] File Exceptions
 - [x] Add Save To File Button
   - [ ] Implementation

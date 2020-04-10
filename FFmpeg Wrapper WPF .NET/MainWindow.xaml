@@ -27,18 +27,18 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Height="400" Margin="0,5,5,0" Width="101" HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel Margin="0,0,0,2">
                 <TextBlock TextWrapping="Wrap" Text="Entry"/>
-                <Button Content="Add" HorizontalContentAlignment="Left" Click="Button_Click"/>
-                <Button Content="Remove" HorizontalContentAlignment="Left" Click="Button_Click_4"/>
+                <Button Content="Add" HorizontalContentAlignment="Left" Click="addButtonClick"/>
+                <Button Content="Remove" HorizontalContentAlignment="Left" Click="removeButtonClick"/>
             </StackPanel>
             <StackPanel Margin="0,0,0,2">
                 <TextBlock TextWrapping="Wrap" Text="Queue"/>
-                <Button Content="Save To File" HorizontalContentAlignment="Left"/>
-                <Button Content="Load From File" HorizontalContentAlignment="Left" Click="Button_Click_1"/>
-                <Button Content="Clear" HorizontalContentAlignment="Left" Click="Button_Click_3"/>
+                <Button Content="Save To File" HorizontalContentAlignment="Left" Click="saveFileButtonClick"/>
+                <Button Content="Load From File" HorizontalContentAlignment="Left" Click="loadFileButtonClick"/>
+                <Button Content="Clear" HorizontalContentAlignment="Left" Click="clearButtonClick"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Text="Processing"/>
-                <Button Content="Start" HorizontalContentAlignment="Left" Click="Button_Click_2"/>
+                <Button Content="Start" HorizontalContentAlignment="Left" Click="startProcessingButtonClick"/>
                 <Button Content="Stop" HorizontalContentAlignment="Left"/>
             </StackPanel>
         </StackPanel>
