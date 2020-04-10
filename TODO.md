@@ -1,0 +1,35 @@
+Todo list for FFastCut
+====
+- [x] Add Task Button
+  - [ ] Implement The Panel
+    - [x] Layout
+    - [ ] Implementation
+- [x] Add Remove Task Button
+  - [ ] Implementation
+- [x] Add Clear Queue Button 
+  - [ ] Implementation
+- [ ] Capture ffmpeg output asynchronously to the Debug Window
+- [ ] Clear the Queue after the ffmpeg process is done
+   - [ ] Do so after all processes are done
+      - [ ] Do so sequentially
+- [ ] Implement Stop ffmpeg Process Button
+- [x] Add Load From File Button
+  - [ ] Implementation
+    - [x] File Loading and Parsing
+    - [ ] Parse Format Requirements
+    - [ ] File format enforcement
+    - [ ] File Exceptions
+- [x] Add Save To File Button
+  - [ ] Implementation
+- [ ] Add Exit Button
+  - [ ] Implementation
+- [ ] Add Options Button
+  - [ ] Implement The Panel
+    - [ ] Add About Section
+    - [ ] Add Processing Section
+## Unimportant until release
+- [ ] Parse the Queue Table with only the relevant fields
+- [ ] Remove hardcoded absolute paths
+- [ ] Add an icon
+- [ ] Change The Window Name
+- [ ] Tidy up the source code
