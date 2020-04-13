@@ -105,7 +105,8 @@ namespace FFmpeg_Wrapper_WPF.NET
                     Arguments = entry.commandArgs,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    UseShellExecute = false
+                    UseShellExecute = false,
+                    CreateNoWindow = true
                 };
                 processQueue.Enqueue(new Process() { StartInfo = processStartInfo });
             }
