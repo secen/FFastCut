@@ -23,8 +23,8 @@ namespace FFmpeg_Wrapper_WPF.NET
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string ffmpegLocation = @"ffmpeg.exe";
         public ObservableCollection<ffmpegEntry> Entries;
-        readonly String debugOutput="";
         public MainWindow()
         {
             InitializeComponent();
@@ -43,16 +43,18 @@ namespace FFmpeg_Wrapper_WPF.NET
             }
             Application.Current.Exit -= new ExitEventHandler(Application_Exit);
         }
-        private void addButtonClick(object sender, RoutedEventArgs e)
+        private void AddButtonClick(object sender, RoutedEventArgs e)
         {
             AddElement subWindow = new AddElement();
             subWindow.Show();
         }
 
-        private void loadFileButtonClick(object sender, RoutedEventArgs e)
+        private void LoadFileButtonClick(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.Filter = "Text Files|*.txt;*.csv|All Files|*.*";
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Text Files|*.txt;*.csv|All Files|*.*"
+            };
             if (dlg.ShowDialog() == true)
             {
                 string fileName = dlg.FileName;
@@ -66,95 +68,71 @@ namespace FFmpeg_Wrapper_WPF.NET
                 queueDataGrid.ItemsSource = Entries;
             }
         }
-        static Task<int> RunProcessAsync(Process p)
+        void AppendDebugData(Object sender, DataReceivedEventArgs e)
+        {
+                if (e.Data != null)
+                {
+                this.Dispatcher.Invoke((Action) (() => {
+                    debugConsole.Text += e.Data + "\n";
+                    debugConsole.CaretIndex = debugConsole.Text.Length;
+                }));
+                }
+        }
+        Task<int> RunProcessAsync(Process p)
         {
             var tcs = new TaskCompletionSource<int>();
             p.EnableRaisingEvents = true;
+            p.OutputDataReceived += new DataReceivedEventHandler(AppendDebugData);
+            p.ErrorDataReceived += new DataReceivedEventHandler(AppendDebugData);
             p.Exited += (sender, args) =>
             {
                 tcs.SetResult(p.ExitCode);
                 p.Dispose();
             };
             p.Start();
+            p.BeginOutputReadLine();
+            p.BeginErrorReadLine();
             return tcs.Task;
         }
-        private async void testing()
-        {
-            Queue<Process> processes = new Queue<Process>();
-            ProcessStartInfo startnfo = new ProcessStartInfo { FileName = @"C:\Windows\system32\notepad.exe" };
-            processes.Enqueue(new Process() { StartInfo = startnfo});
-            processes.Enqueue(new Process() { StartInfo = startnfo });
-            while(processes.Count>0)
-            {
-                int returnCode = await RunProcessAsync(processes.Dequeue());
-                Debug.WriteLine(returnCode.ToString());
-            }
-        }
-        private void experimentalProcessing()
+        private void ExperimentalProcessing()
         {
             Queue<Process> processQueue = new Queue<Process>();
             foreach (ffmpegEntry entry in Entries)
             {
                 var processStartInfo = new ProcessStartInfo
                 {
-                    FileName = @"C:\Users\Gabriel\bins\ffmpeg.exe",
+                    FileName = ffmpegLocation,//@"C:\Windows\System32\fsutil.exe" for testing,
                     Arguments = entry.commandArgs,
-                    RedirectStandardOutput = false,
-                    RedirectStandardError = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     UseShellExecute = false
                 };
                 processQueue.Enqueue(new Process() { StartInfo = processStartInfo });
             }
-            runProcessQueue(processQueue);
+            RunProcessQueue(processQueue);
         }
 
-        private async void runProcessQueue(Queue<Process> processQueue)
+        private async void RunProcessQueue(Queue<Process> processQueue)
         {
+            debugConsole.Text += DateTime.Now.ToString() + ": Starting processing\n";
             while (processQueue.Count > 0)
             {
-                int returnCode = await RunProcessAsync(processQueue.Dequeue());
-                Debug.WriteLine(returnCode.ToString());
+                _ = await RunProcessAsync(processQueue.Dequeue());
             }
+            debugConsole.Text += DateTime.Now.ToString() + ": Processing Done\n";
         }
 
-        private void startProcessingButtonClick(object sender, RoutedEventArgs e)
+        private void StartProcessingButtonClick(object sender, RoutedEventArgs e)
         {
-            const bool doExperimental = true;
-            if(doExperimental)
-                experimentalProcessing();
-            else
-                legacyProcessing();
+            ExperimentalProcessing();
         }
 
-        private void legacyProcessing()
-        {
-            foreach (ffmpegEntry entry in Entries)
-            {
-                var processStartInfo = new ProcessStartInfo
-                {
-                    FileName = @"C:\Users\Gabriel\bins\ffmpeg.exe",
-                    Arguments = entry.commandArgs,
-                    RedirectStandardOutput = false,
-                    RedirectStandardError = false,
-                    UseShellExecute = false
-                };
-                var process = Process.Start(processStartInfo);
-                /* var output = process.StandardOutput.ReadToEnd();
-                 var errorOut = process.StandardError.ReadToEnd();
-                 if (errorOut.Length != 0)
-                     output += "\nERROR " + errorOut;
-                 debugOutput += output;
-                 debugConsole.Text = debugOutput;
-                 process.WaitForExit();*/
-            }
-        }
-
-        private void clearButtonClick(object sender, RoutedEventArgs e)
+        private void ClearButtonClick(object sender, RoutedEventArgs e)
         {
             Entries.Clear();
         }
 
-        private void removeButtonClick(object sender, RoutedEventArgs e)
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -168,19 +146,20 @@ namespace FFmpeg_Wrapper_WPF.NET
             catch (Exception ex) { Debug.WriteLine("Exception: " + ex.Message); }
         }
 
-        private void saveFileButtonClick(object sender, RoutedEventArgs e)
+        private void SaveFileButtonClick(object sender, RoutedEventArgs e)
         {
-            //save as file
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.Filter = "Text Files|*.txt;*.csv";
-            if(dlg.ShowDialog() == true)
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
             {
-                string textToWrite = queueToText();
+                Filter = "Text Files|*.txt;*.csv"
+            };
+            if (dlg.ShowDialog() == true)
+            {
+                string textToWrite = QueueToText();
                 File.WriteAllText(dlg.FileName, textToWrite);
             }
         }
 
-        private string queueToText()
+        private string QueueToText()
         {
             string result = "";
             foreach(ffmpegEntry entry in Entries)
@@ -188,6 +167,12 @@ namespace FFmpeg_Wrapper_WPF.NET
                 result += entry.ToCSVLine() +"\n";
             }
             return result;
+        }
+
+        private void OptionsButtonClick(object sender, RoutedEventArgs e)
+        {
+            OptionsMenu options = new OptionsMenu();
+            options.Show();
         }
     }
 }
