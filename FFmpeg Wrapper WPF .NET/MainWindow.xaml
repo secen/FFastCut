@@ -38,8 +38,8 @@
             </StackPanel>
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Text="Processing"/>
-                <Button Content="Start" HorizontalContentAlignment="Left" Click="StartProcessingButtonClick"/>
-                <Button Content="Stop" HorizontalContentAlignment="Left"/>
+                <Button x:Name="startProcessingButton" Content="Start" HorizontalContentAlignment="Left" Click="StartProcessingButtonClick"/>
+                <Button x:Name ="stopProcessingButton" Content="Stop" HorizontalContentAlignment="Left" Click="StopProcessingButtonClick" IsEnabled="False"/>
                 <Button Content="Options" HorizontalContentAlignment="Left" Click="OptionsButtonClick"/>
             </StackPanel>
         </StackPanel>

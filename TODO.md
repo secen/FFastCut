@@ -10,7 +10,7 @@ Todo list for FFastCut
 - [x] Add Clear Queue Button 
   - [x] Implementation
 - [x] Capture ffmpeg output asynchronously to the Debug Window
-- [] Clear the Queue after the ffmpeg process is done (? maybe add an option)
+- [ ] Clear the Queue after the ffmpeg process is done (? maybe add an option)
    - [ ] Do so after all processes are done
       - [ ] Do so sequentially
 - [ ] Implement Stop ffmpeg Process Button

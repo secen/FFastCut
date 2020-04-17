@@ -43,7 +43,7 @@ namespace FFmpeg_Wrapper_WPF.NET
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var parent = ((MainWindow)Application.Current.MainWindow);
-            ffmpegEntry entry = new ffmpegEntry(nameTextBox.Text,startTextBox.Text,endTextBox.Text,sourceTextBox.Text);
+            FfmpegEntry entry = new FfmpegEntry(nameTextBox.Text,startTextBox.Text,endTextBox.Text,sourceTextBox.Text);
             parent.Entries.Add(entry);
         }
     }

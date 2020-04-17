@@ -6,46 +6,46 @@ using System.Threading.Tasks;
 
 namespace FFmpeg_Wrapper_WPF.NET
 {
-    public class ffmpegEntry
+    public class FfmpegEntry
     {
-        public String newName { get; set; }
-        public String start { get; set; }
-        public String end { get; set; }
-        public String source { get; set; }
-        public String commandArgs { get; set; }
-        public ffmpegEntry(String name,String st,String en, String src)
+        public String NewName { get; set; }
+        public String Start { get; set; }
+        public String End { get; set; }
+        public String Source { get; set; }
+        public String CommandArgs { get; set; }
+        public FfmpegEntry(String name,String st,String en, String src)
         {
-            newName = name;
-            newName = "\"" + newName + "\"";
-            start = st;
-            end = en;
-            source = src;
-            source = "\"" + source + "\"";
-            initCommandArgs();
+            NewName = name;
+            NewName = "\"" + NewName + "\"";
+            Start = st;
+            End = en;
+            Source = src;
+            Source = "\"" + Source + "\"";
+            InitCommandArgs();
         }
-        public ffmpegEntry() { }
-        public void loadFromCSVLine(String line)
+        public FfmpegEntry() { }
+        public void LoadFromCSVLine(String line)
         {
             String[] args = line.Split(';');
             if (args.Length < 4)
                 throw new Exception("malformed input file");
-            newName = args[0];
-            newName = "\"" + newName + "\"";
-            start = args[1];
-            end = args[2];
-            source = args[3];
-            source = "\"" + source + "\"";
-            initCommandArgs();
+            NewName = args[0];
+            NewName = "\"" + NewName + "\"";
+            Start = args[1];
+            End = args[2];
+            Source = args[3];
+            Source = "\"" + Source + "\"";
+            InitCommandArgs();
         }
 
-        internal void initCommandArgs()
+        internal void InitCommandArgs()
         {
-            commandArgs = "-y -i " + source + " -ss " + start + " -to " + end + " -async 1 " + newName;
+            CommandArgs = "-y -i " + Source + " -ss " + Start + " -to " + End + " -async 1 " + NewName;
         }
 
         internal string ToCSVLine()
         {
-            return String.Format("{0};{1};{2};{3}",newName,start,end,source).Replace("\"",String.Empty);
+            return String.Format("{0};{1};{2};{3}",NewName,Start,End,Source).Replace("\"",String.Empty);
         }
     }
 }

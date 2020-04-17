@@ -10,7 +10,7 @@
 
     <DockPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="FFastCut 0.1.0" TextAlignment="Center"/>
+            <TextBlock Text="FFastCut 0.1.1" TextAlignment="Center"/>
             <TextBlock Text="Developed by Gabriel Axinte" TextAlignment="Center"/>
             <TextBlock TextAlignment="Center"><Hyperlink NavigateUri="https://github.com/secen" RequestNavigate="Hyperlink_RequestNavigate">Github</Hyperlink></TextBlock>
         </StackPanel>
